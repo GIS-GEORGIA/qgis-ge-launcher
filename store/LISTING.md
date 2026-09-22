@@ -339,20 +339,171 @@ python tools/make_screenshots.py --preset opera
 At 612×408 a shrunken popup would be unreadable, so those frames show it at 1:1
 on white beside a short caption, which is also what Opera's guidance asks for.
 
-### Fields
+### Add-on → General
 
 | Field | Value |
 |---|---|
-| Package | `dist/qgis-ge-launcher-<version>.zip` |
-| Name | QGIS.GE Launcher — Quick Links |
 | Category | Productivity |
-| Summary | the **Short description** at the top of this file |
-| Description | the **Detailed description** at the top of this file |
-| Icon | taken from the package (`icons/icon128.png`) |
-| Screenshots | `store/opera/popup-light.png`, `popup-dark-search.png`, `options.png` |
-| Support page | `https://github.com/GIS-GEORGIA/qgis-ge-launcher/issues` |
-| License | Custom → paste the MIT text from `LICENSE` |
+| Auto-publishing | **tick it** — automated moderation publishes immediately when the package passes, and a package this small (one permission, no host permissions, no network, no remote code) is exactly what it passes. A failure only falls back to the manual queue |
+| Hide from search results | leave clear |
 
-Leaving the licence at its default would publish an MIT-licensed, open-source
-extension under a non-commercial, no-derivatives licence — contradicting the
-repository. Set it explicitly.
+Opera assigns its own extension id, unrelated to the Edge one: each store signs
+its own copy.
+
+### Version → General
+
+| Field | Value |
+|---|---|
+| Service website URL | *leave empty* — the field is for a service the extension connects to, and it explicitly excludes GitHub pages |
+| Extension support page URL | `https://github.com/GIS-GEORGIA/qgis-ge-launcher/issues` |
+| Extension source code URL (public) | `https://github.com/GIS-GEORGIA/qgis-ge-launcher/tree/v1.0.1` |
+| Extension source code URL (moderators) | same tag URL |
+| License URL | `https://github.com/GIS-GEORGIA/qgis-ge-launcher/blob/v1.0.1/LICENSE` |
+| Privacy policy URL | `https://github.com/GIS-GEORGIA/qgis-ge-launcher/blob/main/PRIVACY.md` |
+
+Point the source links at the **tag**, not `main`, so a moderator reads exactly
+the code that is in the package.
+
+Leaving the licence fields empty means "standard copyright applies", which
+would publish an MIT-licensed extension under a closed licence. Fill both the
+URL and the full text.
+
+**Build instructions:**
+
+```
+No build step is required: the files in the repository are exactly the files in the package — unminified, unbundled, no transpiler. tools/build.py only validates them and produces the ZIP.
+
+To reproduce the uploaded package:
+
+1. OS: any system with Python 3.9 or newer.
+   Built on Windows 11 with Python 3.14.5; CI uses Ubuntu 24.04 with Python 3.12.
+
+2. Tools: the Python 3 standard library only.
+   No node, npm, yarn, grunt, webpack or any other bundler is involved.
+
+3. Commands:
+
+   git clone https://github.com/GIS-GEORGIA/qgis-ge-launcher.git
+   cd qgis-ge-launcher
+   git checkout v1.0.1
+   python tools/build.py
+
+This writes dist/qgis-ge-launcher-1.0.1.zip, which is the package uploaded here. The script copies manifest.json, LICENSE, src/, icons/ and _locales/ into the ZIP, after checking that the manifest is Manifest V3, that every file and message it references exists, and that no page uses an inline script or event handler.
+
+The identical build runs automatically on every git tag:
+https://github.com/GIS-GEORGIA/qgis-ge-launcher/blob/main/.github/workflows/release.yml
+```
+
+Full licence text and full privacy policy text: paste `LICENSE` and the English
+half of `PRIVACY.md`. Opera accepts either the URL or the text; give both.
+
+### Version → Media
+
+The three 612×408 files in `store/opera/`.
+
+### Version → Translations
+
+Opera shows one sub-tab per locale in the package, so **English (en)** and
+**Georgian (ka)** both need a Summary and a Description. Opera asks for
+non-technical language and accepts no HTML or BBCode, so these are plainer than
+the Edge listing — plain text, blank lines, no markup.
+
+**English — Summary**
+
+```
+A toolbar popup of buttons that open the sites you choose. Search them, pin your favourites, open them from the keyboard.
+```
+
+**English — Description**
+
+```
+QGIS.GE Launcher puts the sites you open every day one click away.
+
+Click the toolbar icon and a small window opens with a button for each of your links, grouped the way you want them. Click a button and the site opens in a tab.
+
+WHAT YOU GET
+
+Instant search — start typing and the list filters by name, address or keyword.
+
+Pinned links — the ones you use most stay at the top.
+
+Keyboard shortcuts — Alt+Shift+G opens the window, the arrow keys move between links, Enter opens one, and Alt+1 to Alt+9 open the first nine directly.
+
+Light and dark themes, following your system by default.
+
+Two languages — Georgian and English, switchable at any time.
+
+YOUR LIST, NOT OURS
+
+It starts with a few links so the window is not empty. Everything after that is yours: add your own, rename them in both languages, give them a colour, reorder them, make your own groups, and save or restore the whole list as a file.
+
+PRIVACY
+
+The extension never contacts any server. It asks for one permission, "storage", only so it can remember your own list. No analytics, no advertising, no access to your history or to the pages you visit. It does not even download website icons — the coloured tiles are letters drawn on your own computer.
+
+OPEN SOURCE
+
+MIT licensed. The full source, the issue tracker and every release:
+https://github.com/GIS-GEORGIA/qgis-ge-launcher
+```
+
+**English — Changelog**
+
+```
+1.0.1 — First release on Opera add-ons.
+
+Fixes a small visual issue: when the popup's content was shorter than the window, the background did not fill it all the way down.
+```
+
+**Georgian — Summary**
+
+```
+ხელსაწყოთა ზოლის ფანჯარა თქვენი საიტების ღილაკებით. მოძებნეთ, დაამაგრეთ რჩეულები, გახსენით კლავიატურით.
+```
+
+**Georgian — Description**
+
+```
+QGIS.GE Launcher ერთი დაჭერის მანძილზე გიახლოებთ იმ საიტებს, რომლებსაც ყოველდღე ხსნით.
+
+დააჭირეთ ხატულას ხელსაწყოთა ზოლში და გაიხსნება პატარა ფანჯარა, სადაც თითოეულ ბმულს თავისი ღილაკი აქვს, თქვენთვის სასურველად დაჯგუფებული. ღილაკზე დაჭერით საიტი ჩანართში იხსნება.
+
+რას იღებთ
+
+მყისიერი ძებნა — დაიწყეთ წერა და სია გაიფილტრება სახელით, მისამართით ან საძიებო სიტყვით.
+
+რჩეულები — ყველაზე ხშირად გამოყენებული ბმულები ყოველთვის ზემოთ რჩება.
+
+კლავიატურა — Alt+Shift+G ხსნის ფანჯარას, ისრები ბმულებს შორის გადაგყავთ, Enter ხსნის მონიშნულს, ხოლო Alt+1-დან Alt+9-მდე პირველ ცხრას პირდაპირ.
+
+ღია და მუქი თემა, ნაგულისხმევად სისტემის მიხედვით.
+
+ორი ენა — ქართული და ინგლისური, ნებისმიერ დროს გადართვადი.
+
+სია თქვენია
+
+თავდაპირველად შიგნით რამდენიმე ბმულია, რომ ფანჯარა ცარიელი არ იყოს. დანარჩენი უკვე თქვენზეა: დაამატეთ საკუთარი, დაარქვით სახელი ორივე ენაზე, აირჩიეთ ფერი, გადაალაგეთ, შექმენით საკუთარი ჯგუფები და საჭიროების შემთხვევაში შეინახეთ ან აღადგინეთ მთელი სია ფაილად.
+
+პრივატულობა
+
+გაფართოება არცერთ სერვერს არ უკავშირდება. ითხოვს ერთადერთ ნებართვას — "storage" — მხოლოდ იმისთვის, რომ თქვენივე სია დაიმახსოვროს. არანაირი ანალიტიკა, რეკლამა, არც ისტორიაზე და არც მონახულებულ გვერდებზე წვდომა. საიტების ხატულებსაც კი არ ჩამოტვირთავს — ფერადი კვადრატები თქვენსავე კომპიუტერზე დახატული ასოებია.
+
+ღია კოდი
+
+MIT ლიცენზია. სრული კოდი, issue-ები და ყველა გამოშვება:
+https://github.com/GIS-GEORGIA/qgis-ge-launcher
+```
+
+**Georgian — Changelog**
+
+```
+1.0.1 — პირველი გამოშვება Opera add-ons-ზე.
+
+გასწორდა მცირე ვიზუალური ხარვეზი: როცა ფანჯრის შიგთავსი მოკლე იყო, ფონი ბოლომდე არ ავსებდა მას.
+```
+
+### Then submit
+
+Fill General and Media, fill both language sub-tabs under Translations, then
+return to **General** and click **Submit changes** — the banner about unsubmitted
+changes stays until you do.
