@@ -1,0 +1,7 @@
+dist/
+*.zip
+
+# Personal links — never publish. See private/README.md.
+private/
+.DS_Store
+Thumbs.db

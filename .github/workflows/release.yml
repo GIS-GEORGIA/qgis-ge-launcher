@@ -1,0 +1,52 @@
+name: Build and release
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check that the tag matches manifest.json
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          manifest=$(python -c "import json;print(json.load(open('manifest.json'))['version'])")
+          tag="${GITHUB_REF_NAME#v}"
+          if [ "$manifest" != "$tag" ]; then
+            echo "::error::tag $tag does not match manifest.json version $manifest"
+            exit 1
+          fi
+
+      - name: Validate and package
+        run: python tools/build.py
+
+      - name: Verify the dev pages are in sync with src/
+        run: |
+          python tools/make_dev_pages.py
+          git diff --exit-code -- dev/ \
+            || { echo "::error::dev/ is stale — run python tools/make_dev_pages.py and commit"; exit 1; }
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: qgis-ge-launcher
+          path: dist/*.zip
+
+      - name: Attach the ZIP to the release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+          generate_release_notes: true

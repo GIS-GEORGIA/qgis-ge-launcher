@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "launcher-dev",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8123"],
+      "port": 8123,
+      "url": "http://localhost:8123"
+    }
+  ]
+}

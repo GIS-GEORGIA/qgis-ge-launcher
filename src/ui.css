@@ -1,0 +1,174 @@
+/* Shared styling for the popup and the options page. */
+
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg-sunken: #f4f6f8;
+  --bg-raised: #ffffff;
+  --bg-hover: #eef1f4;
+  --border: #dfe3e8;
+  --border-strong: #c3cad2;
+  --text: #16202a;
+  --text-dim: #5c6b7a;
+  --accent: #2e9e5b;
+  --accent-fg: #ffffff;
+  --danger: #c02a2a;
+  --focus: #2e9e5b;
+  --shadow: 0 1px 2px rgba(16, 24, 32, .08), 0 4px 12px rgba(16, 24, 32, .06);
+
+  --tile-0: #384049;
+  --tile-1: #2e9e5b;
+  --tile-2: #0d8f86;
+  --tile-3: #c07a12;
+  --tile-4: #2563eb;
+  --tile-5: #7c3aed;
+  --tile-6: #c92a72;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #141a20;
+    --bg-sunken: #0e1319;
+    --bg-raised: #1b232b;
+    --bg-hover: #26313b;
+    --border: #2a343e;
+    --border-strong: #3c4854;
+    --text: #e6edf3;
+    --text-dim: #93a1af;
+    --accent: #3fbb72;
+    --accent-fg: #06130b;
+    --danger: #f08a8a;
+    --focus: #3fbb72;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 4px 14px rgba(0, 0, 0, .35);
+
+    --tile-0: #5b6673;
+    --tile-1: #2f9c5b;
+    --tile-2: #12968c;
+    --tile-3: #b8791a;
+    --tile-4: #3b6fe0;
+    --tile-5: #8054e8;
+    --tile-6: #cc3b7d;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #141a20;
+  --bg-sunken: #0e1319;
+  --bg-raised: #1b232b;
+  --bg-hover: #26313b;
+  --border: #2a343e;
+  --border-strong: #3c4854;
+  --text: #e6edf3;
+  --text-dim: #93a1af;
+  --accent: #3fbb72;
+  --accent-fg: #06130b;
+  --danger: #f08a8a;
+  --focus: #3fbb72;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 4px 14px rgba(0, 0, 0, .35);
+
+  --tile-0: #5b6673;
+  --tile-1: #2f9c5b;
+  --tile-2: #12968c;
+  --tile-3: #b8791a;
+  --tile-4: #3b6fe0;
+  --tile-5: #8054e8;
+  --tile-6: #cc3b7d;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 13px/1.45 "Segoe UI", system-ui, -apple-system, "Noto Sans Georgian", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+.icon-btn:hover { background: var(--bg-hover); color: var(--text); }
+.icon-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+.btn {
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--bg-raised);
+  color: var(--text);
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.btn:hover { background: var(--bg-hover); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); font-weight: 600; }
+.btn-primary:hover { filter: brightness(1.06); background: var(--accent); }
+.btn-danger { color: var(--danger); border-color: var(--border-strong); }
+
+.field {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--bg-raised);
+}
+.field:focus { outline: 2px solid var(--focus); outline-offset: -1px; border-color: var(--focus); }
+
+/* ---- language toggle ---------------------------------------------------- */
+
+.lang-toggle {
+  flex: none;
+  display: flex;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-raised);
+}
+.lang-toggle button {
+  border: 0;
+  background: transparent;
+  color: var(--text-dim);
+  padding: 6px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.lang-toggle button[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); }
+
+/* ---- tile monogram ------------------------------------------------------ */
+
+.mono {
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--tile-0);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+}
+.c0 { background: var(--tile-0); }
+.c1 { background: var(--tile-1); }
+.c2 { background: var(--tile-2); }
+.c3 { background: var(--tile-3); }
+.c4 { background: var(--tile-4); }
+.c5 { background: var(--tile-5); }
+.c6 { background: var(--tile-6); }

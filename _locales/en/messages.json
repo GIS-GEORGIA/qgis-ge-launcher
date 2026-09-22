@@ -1,0 +1,5 @@
+{
+  "extName":  { "message": "QGIS.GE Launcher — Quick Links" },
+  "extDesc":  { "message": "One-click access to your qgis.ge sites, GitHub orgs and repos. Fully editable list, no tracking, no network requests." },
+  "cmdOpen":  { "message": "Open the quick links popup" }
+}

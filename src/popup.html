@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>QGIS.GE Launcher</title>
+  <link rel="stylesheet" href="ui.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <input id="search" type="search" autocomplete="off" spellcheck="false" aria-label="Search">
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button id="lang-ka" type="button" aria-pressed="false">ქარ</button>
+      <button id="lang-en" type="button" aria-pressed="false">EN</button>
+    </div>
+    <button id="toggle-settings" class="icon-btn" type="button" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      </svg>
+    </button>
+  </header>
+
+  <main id="list" tabindex="-1"></main>
+
+  <section id="settings" aria-label="Settings">
+    <div class="row">
+      <span id="l-theme"></span>
+      <select id="sel-theme">
+        <option value="auto"></option>
+        <option value="light"></option>
+        <option value="dark"></option>
+      </select>
+    </div>
+    <div class="row">
+      <span id="l-density"></span>
+      <select id="sel-density">
+        <option value="grid"></option>
+        <option value="list"></option>
+      </select>
+    </div>
+    <div class="row">
+      <span id="l-openin"></span>
+      <select id="sel-openin">
+        <option value="newtab"></option>
+        <option value="current"></option>
+      </select>
+    </div>
+    <div class="actions">
+      <button id="btn-edit" class="btn btn-primary" type="button"></button>
+    </div>
+  </section>
+
+  <footer>
+    <span id="hint-open"></span>
+    <span id="hint-num"></span>
+  </footer>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
