@@ -174,25 +174,84 @@ logo to copy it to the other language.
 
 ### Privacy
 
-| Field | Value |
-|---|---|
-| Single Purpose Description | Shows a popup of buttons that open websites the user has configured. The list is stored locally and edited on the extension's own options page. |
-| Permission justification — `storage` | Stores the user's own list of links and their interface preferences (language, theme, layout) so they persist between sessions. No other data is stored. |
-| Are you using remote code? | **No, I am not using remote code.** Every script is bundled in the package. |
-| Data usage — what do you collect? | Tick **nothing**. The extension makes no network request. |
-| Data usage — certifications | Tick all of them; each one holds. |
-| Privacy Policy URL | `https://github.com/GIS-GEORGIA/qgis-ge-launcher/blob/main/PRIVACY.md` |
+Every field on this page, in order. Paste the English text as-is — the review
+team reads English. Each block is inside the 1000-character limit.
 
-### Store listing, per language
+**Single purpose description** (required):
+
+```
+QGIS.GE Launcher has a single purpose: it shows a toolbar popup containing buttons that open websites the user has chosen. Clicking a button opens that URL in a tab.
+
+The user manages the list on the extension's own options page, where links and groups can be added, renamed in two languages, recoloured, reordered, removed, and exported or imported as JSON. A search box filters the list, a star pins a link to the top, and keyboard shortcuts open a link directly.
+
+The extension does nothing else. It declares no host permissions, registers no content scripts and no background service worker, never reads or modifies the content of any web page, and makes no network requests of any kind. The tiles next to each link are coloured letters drawn locally, not downloaded favicons.
+```
+
+**Permission justification → `storage`** (required):
+
+```
+The storage permission is used only to persist the user's own configuration: their list of links (title, URL, group, colour, search keywords, pinned state) and their interface preferences (language, light/dark theme, grid or list layout, and whether links open in a new tab).
+
+Without it the extension would forget the user's links every time the popup closes. Values are written with chrome.storage.sync so the list follows the user across their own signed-in browser profiles, with a chrome.storage.local mirror as a fallback when sync is unavailable.
+
+No other data is stored, and nothing is read from or sent to any server.
+```
+
+**Are you using remote code?** — select **No, I am not using remote code** and
+leave the justification box empty. If the form insists on one anyway:
+
+```
+All JavaScript and CSS ship inside the extension package. There are no script tags pointing outside the package, no remote module imports, no eval(), and no network requests at all.
+```
+
+**Data usage — "What user data do you plan to collect…"** — leave **every**
+checkbox clear. The extension collects none of the listed categories
+(personally identifiable information, health, financial and payment,
+authentication, personal communications, location, web history, user activity,
+website content).
+
+**Privacy policy URL** — not starred, but fill it in; it speeds up review:
+
+```
+https://github.com/GIS-GEORGIA/qgis-ge-launcher/blob/main/PRIVACY.md
+```
+
+**"I certify that the following disclosures are true"** — tick **all three**.
+Each one holds: there is no user data to sell or transfer, the stored link list
+serves only the single purpose above, and nothing touches creditworthiness or
+lending.
+
+### Store listings, per language
+
+The package declares `_locales/en` and `_locales/ka`, so the **Store Listings**
+page lists two rows, **English** and **Georgian**, both starting as *Incomplete*.
+Each needs a Description and an Extension logo before the row turns *Complete*.
+
+Do English first, because its logo can then be copied across:
+
+1. **English → Edit details.**
+2. Paste the English **Detailed description** from the top of this file
+   (1207 characters; the minimum is 250, the maximum 10,000).
+3. Upload `store/logo-300x300.png` as the **Extension logo**, then click
+   **Duplicate this logo for all languages** underneath it.
+4. Optional, each with its own Duplicate link: `store/promo-440x280.png`
+   (small tile), `store/promo-1400x560.png` (large tile), and up to six
+   1280×800 screenshots.
+5. Paste the search terms below, then **Save draft** and close.
+6. **Georgian → Edit details**, paste the Georgian **Detailed description**
+   (1263 characters). The logo and tiles are already there from step 3.
 
 | Field | Where it comes from |
 |---|---|
 | Extension name | read-only, from `manifest.json` |
 | Short description | read-only, from the manifest `description` (117 chars EN / 126 KA) |
-| Description | the **Detailed description** text above — 1207 chars EN, 1263 KA, both over the 250-character minimum |
+| Description | the **Detailed description** text above, per language |
 | Extension logo | `store/logo-300x300.png` |
 | Small / large promo tile | `store/promo-440x280.png`, `store/promo-1400x560.png` |
 | Screenshots | up to 6, at 1280×800 |
+
+Do not remove either language row — both are detected from the package, and
+removing one drops that translation from the store page.
 
 Search terms (max 7 entries, 30 characters each, 21 words total):
 
