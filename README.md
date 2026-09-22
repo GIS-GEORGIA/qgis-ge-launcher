@@ -80,12 +80,14 @@ src/
   options.html/css/js  რედაქტორი
   ui.css               საერთო თემა და კომპონენტები
 icons/                 16/32/48/128 px
+store/                 მაღაზიის ტექსტები და სურათები — არ იფუთება
 dev/                   ბრაუზერში გასაშვები ასლები (chrome.* შიმით) — არ იფუთება
 private/               პირადი ბმულები — gitignore, არ იფუთება, არ ქვეყნდება
 tools/
   build.py             ვალიდაცია + ZIP
   make_icons.py        ხატულების გენერაცია (Pillow)
   make_dev_pages.py    dev/ გვერდების რეგენერაცია src/-იდან
+  make_screenshots.py  მაღაზიის სქრინშოტები 1280×800 (headless Chrome)
 ```
 
 ## შემუშავება · Development

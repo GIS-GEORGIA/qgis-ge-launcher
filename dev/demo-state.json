@@ -1,0 +1,26 @@
+{
+  "_comment": "Example list used only for the store screenshots (dev/shots.html). Public, neutral sites that show what a filled-in popup looks like. Never imported into the shipped defaults.",
+  "schema": 1,
+  "settings": { "lang": "ka", "theme": "light", "openIn": "newtab", "density": "grid" },
+  "groups": [
+    { "id": "qgisge", "ka": "qgis.ge ვებგვერდები", "en": "qgis.ge sites" },
+    { "id": "docs",   "ka": "დოკუმენტაცია",        "en": "Documentation" },
+    { "id": "tools",  "ka": "ხელსაწყოები",         "en": "Tools" }
+  ],
+  "links": [
+    { "id": "d1",  "group": "qgisge", "url": "https://qgis.ge/",              "ka": "QGIS GEORGIA",             "en": "QGIS GEORGIA",        "color": 1, "tags": "qgis home",        "pinned": false },
+    { "id": "d2",  "group": "qgisge", "url": "https://plugins.qgis.ge/",      "ka": "პლაგინების რეპოზიტორია",  "en": "Plugin repository",   "color": 1, "tags": "qgis plugins",     "pinned": true  },
+    { "id": "d3",  "group": "qgisge", "url": "https://osdoc.qgis.ge/",        "ka": "GIS დოკუმენტაცია",        "en": "Open-source GIS docs","color": 6, "tags": "docs gis",         "pinned": false },
+
+    { "id": "d4",  "group": "docs",   "url": "https://docs.qgis.org/",         "ka": "QGIS მანუალი",            "en": "QGIS documentation",  "color": 1, "tags": "qgis manual docs", "pinned": false },
+    { "id": "d5",  "group": "docs",   "url": "https://postgis.net/docs/",      "ka": "PostGIS",                 "en": "PostGIS",             "color": 2, "tags": "postgis sql",      "pinned": true  },
+    { "id": "d6",  "group": "docs",   "url": "https://gdal.org/",              "ka": "GDAL",                    "en": "GDAL",                "color": 3, "tags": "gdal raster",      "pinned": false },
+    { "id": "d7",  "group": "docs",   "url": "https://leafletjs.com/",         "ka": "Leaflet",                 "en": "Leaflet",             "color": 4, "tags": "leaflet map js",   "pinned": false },
+    { "id": "d8",  "group": "docs",   "url": "https://docs.python.org/3/",     "ka": "Python",                  "en": "Python",              "color": 5, "tags": "python docs",      "pinned": false },
+
+    { "id": "d9",  "group": "tools",  "url": "https://github.com/",            "ka": "GitHub",                  "en": "GitHub",              "color": 0, "tags": "github code",      "pinned": true  },
+    { "id": "d10", "group": "tools",  "url": "https://developer.mozilla.org/", "ka": "MDN",                     "en": "MDN Web Docs",        "color": 4, "tags": "mdn web docs",     "pinned": false },
+    { "id": "d11", "group": "tools",  "url": "https://www.openstreetmap.org/", "ka": "OpenStreetMap",           "en": "OpenStreetMap",       "color": 2, "tags": "osm map",          "pinned": false },
+    { "id": "d12", "group": "tools",  "url": "https://overpass-turbo.eu/",     "ka": "Overpass Turbo",          "en": "Overpass Turbo",      "color": 3, "tags": "overpass osm query","pinned": false }
+  ]
+}

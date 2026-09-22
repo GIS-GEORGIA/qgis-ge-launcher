@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ka">
 <head>
   <meta charset="utf-8">
-  <title>Store screenshots</title>
+  <title>Store screenshot</title>
   <style>
-    html, body { margin: 0; background: #fff; }
+    html, body { margin: 0; width: 1280px; height: 800px; overflow: hidden; background: #fff; }
     .frame {
+      position: relative;
       width: 1280px;
       height: 800px;
       display: grid;
@@ -13,42 +14,102 @@
       background: linear-gradient(140deg, #2e9e5b, #145c33);
     }
     .frame.dark { background: linear-gradient(140deg, #1d2a33, #0b1116); }
-    .shell {
-      width: 380px;
-      height: 580px;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, .35), 0 2px 6px rgba(0, 0, 0, .2);
-      background: #fff;
-    }
-    .shell.wide { width: 1100px; height: 700px; }
-    iframe { width: 100%; height: 100%; border: 0; display: block; }
     .caption {
       position: absolute;
-      top: 56px;
+      top: 54px;
       left: 0;
       right: 0;
       text-align: center;
-      font: 600 26px/1.3 "Segoe UI", system-ui, sans-serif;
+      font: 500 27px/1.3 "Segoe UI", system-ui, "Noto Sans Georgian", sans-serif;
       color: #fff;
       letter-spacing: -.01em;
+      margin: 0;
     }
-    .frame { position: relative; }
+    .shell {
+      width: 380px;
+      height: 580px;
+      margin-top: 34px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 26px 64px rgba(0, 0, 0, .38), 0 2px 6px rgba(0, 0, 0, .22);
+    }
+    .shell.wide { width: 1080px; height: 620px; }
+    iframe { width: 100%; height: 100%; border: 0; display: block; }
   </style>
 </head>
 <body>
-  <!-- Screenshot each .frame at 1280x800 for the store listing. -->
-  <div class="frame">
-    <p class="caption">ყველა თქვენი საიტი ერთ დაჭერაზე</p>
-    <div class="shell"><iframe src="popup.html" title="Popup, grid view"></iframe></div>
-  </div>
-  <div class="frame dark">
-    <p class="caption">Search, pin, and open with the keyboard</p>
-    <div class="shell"><iframe src="popup.html" title="Popup, dark theme"></iframe></div>
-  </div>
-  <div class="frame dark">
-    <p class="caption">Your list — add, rename, recolour, reorder</p>
-    <div class="shell wide"><iframe src="options.html" title="Options page"></iframe></div>
-  </div>
+<script>
+/* Renders ONE 1280x800 store screenshot, chosen with ?shot=1|2|3.
+   tools/make_screenshots.py drives this with headless Chrome. */
+(async function () {
+  var SHOTS = {
+    1: {
+      page: 'popup.html', dark: false, wide: false,
+      caption: 'ყველა თქვენი საიტი ერთ დაჭერაზე',
+      settings: { lang: 'ka', theme: 'light', density: 'grid' },
+    },
+    2: {
+      page: 'popup.html', dark: true, wide: false,
+      caption: 'Search, pin and open from the keyboard',
+      settings: { lang: 'en', theme: 'dark', density: 'grid' },
+      search: 'docs',
+    },
+    3: {
+      page: 'options.html', dark: true, wide: true,
+      caption: 'თქვენი სია — დამატება, გადარქმევა, გადალაგება',
+      settings: { lang: 'ka', theme: 'dark', density: 'grid' },
+    },
+  };
+
+  var n = new URLSearchParams(location.search).get('shot') || '1';
+  var shot = SHOTS[n] || SHOTS[1];
+
+  var state = await (await fetch('demo-state.json')).json();
+  delete state._comment;
+  Object.assign(state.settings, shot.settings);
+  var raw = JSON.stringify(state);
+  localStorage.setItem('devshim:sync:state', raw);
+  localStorage.setItem('devshim:local:state', raw);
+
+  var frame = document.createElement('div');
+  frame.className = 'frame' + (shot.dark ? ' dark' : '');
+
+  var caption = document.createElement('p');
+  caption.className = 'caption';
+  caption.textContent = shot.caption;
+
+  var shell = document.createElement('div');
+  shell.className = 'shell' + (shot.wide ? ' wide' : '');
+
+  var iframe = document.createElement('iframe');
+  iframe.title = shot.caption;
+  iframe.addEventListener('load', function () {
+    var doc = iframe.contentDocument;
+    if (shot.search) {
+      var box = doc.getElementById('search');
+      box.value = shot.search;
+      box.dispatchEvent(new iframe.contentWindow.Event('input', { bubbles: true }));
+    }
+    doc.documentElement.style.setProperty('scrollbar-width', 'none');
+    if (!shot.wide) {
+      // A real popup shrinks to its content; match that so a filtered list
+      // does not sit above an empty strip.
+      requestAnimationFrame(function () {
+        var h = Math.min(580, Math.max(240, doc.body.scrollHeight));
+        shell.style.height = h + 'px';
+        document.documentElement.dataset.ready = '1';
+      });
+      return;
+    }
+    document.documentElement.dataset.ready = '1';
+  });
+  iframe.src = shot.page;
+
+  shell.append(iframe);
+  frame.append(caption, shell);
+  document.body.append(frame);
+}());
+</script>
 </body>
 </html>
