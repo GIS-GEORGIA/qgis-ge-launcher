@@ -18,7 +18,7 @@ auto-update an extension hosted on your own server.
 
 For everyone else — anyone installing on their own laptop — the route is the
 Microsoft Edge Add-ons store, or **Load unpacked** from a GitHub release. See
-[the install page](https://gis-georgia.github.io/qgis-ge-launcher/).
+[the install page](https://ext.qgis.ge/).
 
 ## 1. Create the signing key, once
 

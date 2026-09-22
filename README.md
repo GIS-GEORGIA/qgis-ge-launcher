@@ -29,7 +29,7 @@ Vivaldi, Arc, Yandex. · Works in every Chromium-based browser.
 
 ### დაყენების გვერდი · Install page
 
-<https://gis-georgia.github.io/qgis-ge-launcher/> — ქართულად და ინგლისურად,
+<https://ext.qgis.ge/> — ქართულად და ინგლისურად,
 ნაბიჯ-ნაბიჯ, ყველა Chromium ბრაუზერისთვის.
 
 | მაღაზია | სტატუსი |
