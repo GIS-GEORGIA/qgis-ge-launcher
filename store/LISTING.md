@@ -275,22 +275,34 @@ overwrite the wording above, which is already checked against the manifest.
 
 ### Notes for certification
 
+First question — **"Does a tester need credentials, accounts, or any other
+info to test your extension?"** — answer **No, testers can access and test all
+functionality without any additional info**.
+
+Notes are required on *every* submission, even a resubmission of the same
+text. This is 1838 characters, inside the 2000 limit:
+
 ```
-No login, no backend, no accounts — nothing to set up before testing.
+No credentials, accounts or setup of any kind are needed. The extension has no backend, no sign-in and no server component.
 
-The popup opens from the toolbar icon (or Alt+Shift+G) and shows three buttons
-that open public QGIS GEORGIA websites. Click one to open it in a new tab.
-Type in the search box to filter, press Enter to open the first match, or
-Alt+1..3 to open one directly. The star on a button pins it to the top.
+WHAT IT DOES
+Click the toolbar icon, or press Alt+Shift+G, to open the popup. It shows buttons for websites the user has configured; the package ships with three public QGIS GEORGIA sites so the popup is not empty on first run. Clicking a button opens that URL in a tab.
 
-The gear opens settings (theme, grid/list view, where links open) and
-"Edit links" opens the options page, where links and groups can be added,
-renamed, recoloured, reordered, removed, and exported or imported as JSON.
+HOW TO TEST
+1. Click any button - the site opens in a new tab.
+2. Type in the search box to filter by title, URL or keyword. Press Enter to open the first match, Alt+1..3 to open a link directly, or use the arrow keys to move the selection.
+3. Hover a button and click its star to pin it; pinned links move to a section at the top.
+4. Click the gear for settings: language (Georgian or English), theme (light, dark or follow system), grid or list layout, and whether links open in a new tab or the current one.
+5. Click "Edit links" there to open the options page, where links and groups can be added, renamed in both languages, recoloured, reordered, removed, and exported or imported as JSON. Changes save automatically.
 
-"storage" is the only permission and the extension makes no network request of
-any kind — it draws coloured letter tiles rather than fetching favicons.
+PERMISSIONS AND DATA
+"storage" is the only permission, used to remember the user's own link list and interface preferences. There are no host permissions, no content scripts and no background service worker, so no web page is ever read or modified. The extension makes no network request of any kind - the coloured tiles beside each link are letters drawn locally, not downloaded favicons. No remote code: all JavaScript and CSS ship inside the package.
 
-Source: https://github.com/GIS-GEORGIA/qgis-ge-launcher
+LANGUAGES
+The package contains _locales/en and _locales/ka, so the listing appears in English and Georgian. The popup also has its own language toggle, independent of the browser UI language.
+
+SOURCE
+https://github.com/GIS-GEORGIA/qgis-ge-launcher (MIT licensed)
 ```
 
 Certification takes up to seven business days.
