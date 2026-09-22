@@ -277,10 +277,14 @@ overwrite the wording above, which is already checked against the manifest.
 
 First question — **"Does a tester need credentials, accounts, or any other
 info to test your extension?"** — answer **No, testers can access and test all
-functionality without any additional info**.
+functionality without any additional info**, which is the truth here.
 
-Notes are required on *every* submission, even a resubmission of the same
-text. This is 1838 characters, inside the 2000 limit:
+Choosing that answer **disables the notes box**, even though the label carries a
+required asterisk and warns that notes must accompany every submission. That is
+the form gating the field, not a mistake: the box exists mainly for test
+accounts and passwords, and an extension that needs none submits with it empty.
+So the text below normally goes unused — keep it for a submission that does
+answer "Yes", for a reviewer who asks, or in case the form changes. It is 1838 characters, inside the 2000 limit:
 
 ```
 No credentials, accounts or setup of any kind are needed. The extension has no backend, no sign-in and no server component.
