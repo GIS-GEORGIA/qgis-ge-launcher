@@ -34,7 +34,7 @@ Vivaldi, Arc, Yandex. · Works in every Chromium-based browser.
 
 | მაღაზია | სტატუსი |
 |---|---|
-| [Microsoft Edge Add-ons](https://partner.microsoft.com/dashboard/microsoftedge) | განხილვაშია — ბმული გამოქვეყნების შემდეგ |
+| [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/mehgilbmgbbcgpmfcdgdmemnmnpkfaom) | **LIVE** — v1.0.0, 2026-09-22 |
 | Chrome Web Store | დაბლოკილია, იხ. `store/CHROME-REGION-REQUEST.md` |
 | [GitHub Releases](https://github.com/GIS-GEORGIA/qgis-ge-launcher/releases/latest) | ხელმისაწვდომია ახლავე |
 

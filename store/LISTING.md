@@ -158,6 +158,8 @@ backdrop. To capture them:
 
 ## Microsoft Edge Add-ons — Partner Center walkthrough
 
+**Published:** <https://microsoftedge.microsoft.com/addons/detail/mehgilbmgbbcgpmfcdgdmemnmnpkfaom> (v1.0.0, 2026-09-22)
+
 Upload `dist/qgis-ge-launcher-<version>.zip` at
 <https://partner.microsoft.com/dashboard/microsoftedge>. Registration is free and
 needs a personal Microsoft account (a work or school account will not work).
