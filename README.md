@@ -115,11 +115,19 @@ python tools/build.py --check
 1. აწიეთ `version` `manifest.json`-ში.
 2. `git tag v1.0.1 && git push --tags` — GitHub Actions ააწყობს ZIP-ს და მიაბამს release-ს.
 3. ატვირთეთ ZIP:
-   - [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole) (ერთჯერადი $5 რეგისტრაცია)
-   - [Microsoft Edge Add-ons](https://partner.microsoft.com/dashboard/microsoftedge) (უფასო)
-   - [Opera add-ons](https://addons.opera.com/developer/) (უფასო)
+   - [Microsoft Edge Add-ons](https://partner.microsoft.com/dashboard/microsoftedge) — უფასო, **მთავარი მაღაზია**
+   - [Opera add-ons](https://addons.opera.com/developer/) — უფასო
+   - [Chrome Web Store](https://chrome.google.com/webstore/devconsole) — ერთჯერადი $5
 
-Brave, Vivaldi და Arc იყენებენ Chrome Web Store-ს, ცალკე ატვირთვა არ სჭირდებათ.
+`store/LISTING.md`-ში გამზადებულია Partner Center-ის ყველა ველი.
+
+> **Chrome Web Store და საქართველო.** $5-ის გადახდა Google-ის სავაჭრო სისტემაზე
+> გადის, რომლის ქვეყნების სიაში საქართველო არ არის, ამიტომ რეგისტრაცია ვერ
+> სრულდება. Chrome-ის გუნდი
+> [აღიარებს შეზღუდვას](https://groups.google.com/a/chromium.org/g/chromium-extensions/c/FWK5U6_EJr8)
+> და ამბობს, რომ რეგიონებს აფართოებს, თარიღის გარეშე. მანამდე Chrome-ის,
+> Brave-ის, Vivaldi-ის და Arc-ის მომხმარებლებისთვის რჩება GitHub Releases-იდან
+> ჩამოტვირთვა და „Load unpacked“.
 
 ## ლიცენზია · License
 

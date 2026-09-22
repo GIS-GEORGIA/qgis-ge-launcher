@@ -1,7 +1,13 @@
-"""Generate the extension icons (16/32/48/128 px) into icons/.
+"""Generate the extension icons into icons/ and the store artwork into store/.
 
 Usage:  python tools/make_icons.py
 Requires Pillow.  Re-run only when the mark changes; the PNGs are committed.
+
+Store artwork sizes follow the Microsoft Edge Add-ons requirements, which are a
+superset of what the Chrome Web Store asks for:
+  logo-300x300.png     extension logo, 1:1, required (min 128x128)
+  promo-440x280.png    small promotional tile, optional
+  promo-1400x560.png   large promotional tile, optional
 """
 from __future__ import annotations
 
@@ -56,6 +62,37 @@ def make(size: int) -> Image.Image:
     return base.resize((size, size), Image.LANCZOS)
 
 
+BACKDROP = (14, 19, 25, 255)
+
+
+def promo_tile(width: int, height: int, mark_px: int) -> Image.Image:
+    """Backdrop + centred mark, with a faint echo of the popup's link grid."""
+    tile = Image.new("RGBA", (width, height), BACKDROP)
+
+    ghost = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(ghost)
+    cell = mark_px * 0.30
+    gap = cell * 0.34
+    cols, rows = 3, 2
+    block_w = cols * cell + (cols - 1) * gap
+    block_h = rows * cell + (rows - 1) * gap
+    x0 = width / 2 + mark_px * 0.42
+    y0 = (height - block_h) / 2
+    for r in range(rows):
+        for c in range(cols):
+            x = x0 + c * (cell + gap)
+            y = y0 + r * (cell + gap)
+            if x + cell > width - cell * 0.4:
+                continue
+            draw.rounded_rectangle((x, y, x + cell, y + cell), cell * 0.28,
+                                   fill=(255, 255, 255, 20))
+    tile.alpha_composite(ghost)
+
+    mark = make(mark_px)
+    tile.alpha_composite(mark, (int(width / 2 - mark_px * 1.15), int((height - mark_px) / 2)))
+    return tile.convert("RGB")
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     for size in SIZES:
@@ -63,14 +100,18 @@ def main() -> None:
         make(size).save(path, "PNG", optimize=True)
         print(f"wrote {path.relative_to(ROOT)}")
 
-    # A 440x280 small promo tile for the Chrome Web Store listing.
-    promo = Image.new("RGBA", (440, 280), (14, 19, 25, 255))
-    mark = make(128).resize((160, 160), Image.LANCZOS)
-    promo.alpha_composite(mark, (140, 44))
     store = ROOT / "store"
     store.mkdir(parents=True, exist_ok=True)
-    promo.convert("RGB").save(store / "promo-440x280.png", "PNG", optimize=True)
-    print(f"wrote {(store / 'promo-440x280.png').relative_to(ROOT)}")
+
+    make(300).save(store / "logo-300x300.png", "PNG", optimize=True)
+    print(f"wrote {(store / 'logo-300x300.png').relative_to(ROOT)}")
+
+    for name, (w, h, mark_px) in {
+        "promo-440x280.png": (440, 280, 150),
+        "promo-1400x560.png": (1400, 560, 340),
+    }.items():
+        promo_tile(w, h, mark_px).save(store / name, "PNG", optimize=True)
+        print(f"wrote {(store / name).relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
