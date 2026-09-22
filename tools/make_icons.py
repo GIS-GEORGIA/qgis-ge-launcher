@@ -5,7 +5,8 @@ Requires Pillow.  Re-run only when the mark changes; the PNGs are committed.
 
 Store artwork sizes follow the Microsoft Edge Add-ons requirements, which are a
 superset of what the Chrome Web Store asks for:
-  logo-300x300.png     extension logo, 1:1, required (min 128x128)
+  logo-300x300.png     Edge extension logo, 1:1, required (min 128x128)
+  icon64.png           Opera add-ons icon, exactly 64x64
   promo-440x280.png    small promotional tile, optional
   promo-1400x560.png   large promotional tile, optional
 """
@@ -103,8 +104,10 @@ def main() -> None:
     store = ROOT / "store"
     store.mkdir(parents=True, exist_ok=True)
 
-    make(300).save(store / "logo-300x300.png", "PNG", optimize=True)
-    print(f"wrote {(store / 'logo-300x300.png').relative_to(ROOT)}")
+    # Store artwork that no store loads from the package itself.
+    for name, px in (("logo-300x300.png", 300), ("icon64.png", 64)):
+        make(px).save(store / name, "PNG", optimize=True)
+        print(f"wrote {(store / name).relative_to(ROOT)}")
 
     for name, (w, h, mark_px) in {
         "promo-440x280.png": (440, 280, 150),
