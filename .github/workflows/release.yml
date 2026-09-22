@@ -39,14 +39,48 @@ jobs:
           git diff --exit-code -- dev/ \
             || { echo "::error::dev/ is stale — run python tools/make_dev_pages.py and commit"; exit 1; }
 
+      # A signed .crx is only useful for policy-managed installs, so it is built
+      # solely when a CRX_PRIVATE_KEY secret exists. See docs/ENTERPRISE.md.
+      - name: Detect the signing key
+        id: key
+        env:
+          CRX_PRIVATE_KEY: ${{ secrets.CRX_PRIVATE_KEY }}
+        run: |
+          if [ -n "$CRX_PRIVATE_KEY" ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::CRX_PRIVATE_KEY is not set — skipping the signed .crx"
+          fi
+
+      - name: Pack and sign the .crx
+        if: steps.key.outputs.present == 'true'
+        env:
+          CRX_PRIVATE_KEY: ${{ secrets.CRX_PRIVATE_KEY }}
+          CRX_BASE_URL: ${{ vars.CRX_BASE_URL || 'https://qgis.ge/launcher/' }}
+        run: |
+          umask 077
+          key="$(mktemp)"
+          trap 'shred -u "$key" 2>/dev/null || rm -f "$key"' EXIT
+          printf '%s\n' "$CRX_PRIVATE_KEY" > "$key"
+          python tools/make_crx.py --key "$key" --base-url "$CRX_BASE_URL"
+
       - uses: actions/upload-artifact@v4
         with:
           name: qgis-ge-launcher
-          path: dist/*.zip
+          path: |
+            dist/*.zip
+            dist/*.crx
+            dist/updates.xml
+          if-no-files-found: warn
 
-      - name: Attach the ZIP to the release
+      - name: Attach the package to the release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/*.zip
+          files: |
+            dist/*.zip
+            dist/*.crx
+            dist/updates.xml
+          fail_on_unmatched_files: false
           generate_release_notes: true

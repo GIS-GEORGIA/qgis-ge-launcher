@@ -1,4 +1,4 @@
-"""Render the store screenshots at 1280x800 into store/screenshots/.
+"""Render the product screenshots at 1280x800 into docs/img/.
 
 Serves the repo over http:// and drives headless Chrome across
 dev/shots.html?shot=1..3, which loads the real popup and options pages with the
@@ -7,7 +7,8 @@ example list in dev/demo-state.json.
 Usage:  python tools/make_screenshots.py [--browser PATH]
 
 1280x800 is accepted by both the Microsoft Edge Add-ons store (which also takes
-640x480) and the Chrome Web Store (which also takes 640x400).
+640x480) and the Chrome Web Store (which also takes 640x400). The same files
+illustrate the install page at docs/index.html.
 """
 from __future__ import annotations
 
@@ -22,7 +23,7 @@ import sys
 import threading
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-OUT = ROOT / "store" / "screenshots"
+OUT = ROOT / "docs" / "img"
 SHOTS = {
     1: "popup-light.png",
     2: "popup-dark-search.png",

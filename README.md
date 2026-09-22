@@ -27,9 +27,16 @@ Vivaldi, Arc, Yandex. · Works in every Chromium-based browser.
 
 ## დაყენება · Install
 
-### მაღაზიიდან · From the store
+### დაყენების გვერდი · Install page
 
-გამოქვეყნების შემდეგ ბმულები აქ დაემატება. · Links will be added here once published.
+<https://gis-georgia.github.io/qgis-ge-launcher/> — ქართულად და ინგლისურად,
+ნაბიჯ-ნაბიჯ, ყველა Chromium ბრაუზერისთვის.
+
+| მაღაზია | სტატუსი |
+|---|---|
+| [Microsoft Edge Add-ons](https://partner.microsoft.com/dashboard/microsoftedge) | განხილვაშია — ბმული გამოქვეყნების შემდეგ |
+| Chrome Web Store | დაბლოკილია, იხ. `store/CHROME-REGION-REQUEST.md` |
+| [GitHub Releases](https://github.com/GIS-GEORGIA/qgis-ge-launcher/releases/latest) | ხელმისაწვდომია ახლავე |
 
 ### ხელით (დეველოპერის რეჟიმი) · Manually (developer mode)
 
@@ -81,13 +88,15 @@ src/
   ui.css               საერთო თემა და კომპონენტები
 icons/                 16/32/48/128 px
 store/                 მაღაზიის ტექსტები და სურათები — არ იფუთება
+docs/                  დაყენების გვერდი (GitHub Pages) + ENTERPRISE.md
 dev/                   ბრაუზერში გასაშვები ასლები (chrome.* შიმით) — არ იფუთება
 private/               პირადი ბმულები — gitignore, არ იფუთება, არ ქვეყნდება
 tools/
   build.py             ვალიდაცია + ZIP
   make_icons.py        ხატულების გენერაცია (Pillow)
   make_dev_pages.py    dev/ გვერდების რეგენერაცია src/-იდან
-  make_screenshots.py  მაღაზიის სქრინშოტები 1280×800 (headless Chrome)
+  make_screenshots.py  სქრინშოტები 1280×800 (headless Chrome)
+  make_crx.py          ხელმოწერილი .crx + updates.xml (ცენტრალიზებული დაყენება)
 ```
 
 ## შემუშავება · Development
@@ -130,6 +139,14 @@ python tools/build.py --check
 > და ამბობს, რომ რეგიონებს აფართოებს, თარიღის გარეშე. მანამდე Chrome-ის,
 > Brave-ის, Vivaldi-ის და Arc-ის მომხმარებლებისთვის რჩება GitHub Releases-იდან
 > ჩამოტვირთვა და „Load unpacked“.
+
+Chrome-ისთვის ორი პარალელური გზაა:
+
+- **`store/CHROME-REGION-REQUEST.md`** — მზა ტექსტი Google-ისთვის, რომ საქართველო
+  მხარდაჭერილ რეგიონებს დაემატოს
+- **`docs/ENTERPRISE.md`** — ჯგუფური პოლიტიკით ცენტრალიზებული დაყენება
+  ხელმოწერილი `.crx`-ითა და `updates.xml`-ით, მაღაზიის გარეშე და ავტომატური
+  განახლებით
 
 ## ლიცენზია · License
 

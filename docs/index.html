@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ka" data-lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QGIS.GE Launcher — დაყენება</title>
+<meta name="description" content="QGIS.GE Launcher — ბრაუზერის გაფართოება სწრაფი ბმულებისთვის. დაყენების ინსტრუქცია Edge-ისა და Chrome-ისთვის.">
+<link rel="icon" href="img/icon128.png">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #ffffff;
+    --bg-sunken: #f4f6f8;
+    --bg-raised: #ffffff;
+    --border: #dfe3e8;
+    --border-strong: #c3cad2;
+    --text: #16202a;
+    --text-dim: #5c6b7a;
+    --accent: #2e9e5b;
+    --accent-fg: #ffffff;
+    --shadow: 0 1px 2px rgba(16,24,32,.08), 0 6px 20px rgba(16,24,32,.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #141a20; --bg-sunken: #0e1319; --bg-raised: #1b232b;
+      --border: #2a343e; --border-strong: #3c4854;
+      --text: #e6edf3; --text-dim: #93a1af;
+      --accent: #3fbb72; --accent-fg: #06130b;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 6px 22px rgba(0,0,0,.35);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.65 "Segoe UI", system-ui, -apple-system, "Noto Sans Georgian", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px 72px; }
+
+  header { text-align: center; padding: 56px 0 8px; }
+  header img { width: 76px; height: 76px; border-radius: 18px; }
+  h1 { margin: 16px 0 6px; font-size: 30px; font-weight: 700; letter-spacing: -.02em; }
+  .tagline { margin: 0 auto; max-width: 30em; color: var(--text-dim); }
+
+  .lang { display: flex; justify-content: center; gap: 0; margin: 20px 0 0; }
+  .lang button {
+    border: 1px solid var(--border-strong); background: var(--bg-raised);
+    color: var(--text-dim); font: inherit; font-size: 13px; font-weight: 700;
+    padding: 6px 14px; cursor: pointer;
+  }
+  .lang button:first-child { border-radius: 8px 0 0 8px; }
+  .lang button:last-child { border-radius: 0 8px 8px 0; border-left: 0; }
+  .lang button[aria-pressed="true"] { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 26px 0 8px; }
+  .btn {
+    display: inline-block; padding: 11px 20px; border-radius: 10px;
+    border: 1px solid var(--border-strong); background: var(--bg-raised);
+    color: inherit; text-decoration: none; font-weight: 600;
+  }
+  .btn:hover { border-color: var(--accent); }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+  .btn-primary:hover { filter: brightness(1.06); }
+
+  h2 { margin: 48px 0 4px; font-size: 21px; font-weight: 700; letter-spacing: -.01em; }
+  h2 + .lead { margin: 0 0 18px; color: var(--text-dim); }
+
+  .card {
+    border: 1px solid var(--border); border-radius: 14px;
+    background: var(--bg-raised); box-shadow: var(--shadow);
+    padding: 20px 22px; margin: 16px 0;
+  }
+  .card h3 { margin: 0 0 4px; font-size: 17px; font-weight: 700; }
+  .card .note { margin: 0 0 14px; color: var(--text-dim); font-size: 14px; }
+  ol { margin: 0; padding-left: 1.3em; }
+  ol li { margin: 7px 0; }
+  ul.plain { margin: 10px 0 0; padding-left: 1.2em; color: var(--text-dim); font-size: 14px; }
+
+  code, kbd {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: .88em; background: var(--bg-sunken);
+    border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px;
+  }
+  kbd { font-weight: 600; }
+
+  .shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 18px; }
+  .shots figure { margin: 0; }
+  .shots img { width: 100%; border-radius: 12px; border: 1px solid var(--border); display: block; }
+  .shots figcaption { margin-top: 7px; font-size: 13px; color: var(--text-dim); text-align: center; }
+
+  footer { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 14px; text-align: center; }
+  footer a { color: inherit; }
+
+  [data-en] { display: none; }
+  html[data-lang="en"] [data-ka] { display: none; }
+  html[data-lang="en"] [data-en] { display: revert; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <img src="img/icon128.png" alt="">
+    <h1>QGIS.GE Launcher</h1>
+    <p class="tagline">
+      <span data-ka>ერთი დაჭერით გახსენით საიტები და რეპოზიტორიები, რომლებსაც ყოველდღე იყენებთ. სია სრულად თქვენია.</span>
+      <span data-en>Open the sites and repositories you use every day in one click. The list is entirely yours.</span>
+    </p>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-set-lang="ka" aria-pressed="true">ქართული</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">English</button>
+    </div>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://github.com/GIS-GEORGIA/qgis-ge-launcher/releases/latest">
+        <span data-ka>ჩამოტვირთვა</span><span data-en>Download</span>
+      </a>
+      <a class="btn" href="https://github.com/GIS-GEORGIA/qgis-ge-launcher">
+        <span data-ka>კოდი GitHub-ზე</span><span data-en>Source on GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <h2><span data-ka>დაყენება</span><span data-en>Install</span></h2>
+  <p class="lead">
+    <span data-ka>აირჩიეთ თქვენი ბრაუზერი.</span>
+    <span data-en>Pick your browser.</span>
+  </p>
+
+  <div class="card">
+    <h3>Microsoft Edge</h3>
+    <p class="note">
+      <span data-ka>მაღაზიიდან — ავტომატური განახლებით. ამჟამად განხილვის პროცესშია; ბმული აქ გამოჩნდება, როგორც კი გამოქვეყნდება.</span>
+      <span data-en>From the store, with automatic updates. Currently in review; the link will appear here once it is published.</span>
+    </p>
+    <p class="note">
+      <span data-ka>მანამდე Edge-ზეც მუშაობს ქვემოთ აღწერილი ხელით დაყენება — Edge-ზე მისამართია <code>edge://extensions</code>.</span>
+      <span data-en>Until then the manual route below works in Edge too — its address is <code>edge://extensions</code>.</span>
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Chrome, Brave, Vivaldi, Arc, Opera</h3>
+    <p class="note">
+      <span data-ka>ხელით დაყენება. სამი წუთი სჭირდება და ყველა Chromium ბრაუზერში ერთნაირად მუშაობს.</span>
+      <span data-en>Manual install. It takes three minutes and works the same in every Chromium browser.</span>
+    </p>
+    <ol>
+      <li>
+        <span data-ka>ჩამოტვირთეთ <a href="https://github.com/GIS-GEORGIA/qgis-ge-launcher/releases/latest">ბოლო გამოშვების</a> ZIP ფაილი.</span>
+        <span data-en>Download the ZIP from the <a href="https://github.com/GIS-GEORGIA/qgis-ge-launcher/releases/latest">latest release</a>.</span>
+      </li>
+      <li>
+        <span data-ka><b>ამოხსენით</b> ცალკე საქაღალდეში და დატოვეთ იქ — წაშლის შემთხვევაში გაფართოება გაითიშება.</span>
+        <span data-en><b>Unzip it</b> into a folder and leave it there — deleting the folder disables the extension.</span>
+      </li>
+      <li>
+        <span data-ka>გახსენით <code>chrome://extensions</code> (Edge-ზე <code>edge://extensions</code>, Brave-ზე <code>brave://extensions</code>).</span>
+        <span data-en>Open <code>chrome://extensions</code> (<code>edge://extensions</code> in Edge, <code>brave://extensions</code> in Brave).</span>
+      </li>
+      <li>
+        <span data-ka>ზედა მარჯვენა კუთხეში ჩართეთ <b>Developer mode</b> / <b>დეველოპერის რეჟიმი</b>.</span>
+        <span data-en>Turn on <b>Developer mode</b>, top right.</span>
+      </li>
+      <li>
+        <span data-ka>დააჭირეთ <b>Load unpacked</b> და აირჩიეთ ამოხსნილი საქაღალდე — ის, რომელშიც <code>manifest.json</code> დევს.</span>
+        <span data-en>Click <b>Load unpacked</b> and pick the unzipped folder — the one that contains <code>manifest.json</code>.</span>
+      </li>
+      <li>
+        <span data-ka>მზადაა. დააჭირეთ ხატულას ხელსაწყოთა ზოლში, ან <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>G</kbd>.</span>
+        <span data-en>Done. Click the toolbar icon, or press <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>G</kbd>.</span>
+      </li>
+    </ol>
+    <ul class="plain">
+      <li>
+        <span data-ka>ბრაუზერმა შეიძლება აჩვენოს შეტყობინება დეველოპერის რეჟიმის გაფართოებების შესახებ — ეს ნორმალურია ამ გზით დაყენებისას.</span>
+        <span data-en>The browser may warn about developer-mode extensions — that is normal for this install route.</span>
+      </li>
+      <li>
+        <span data-ka>ასე დაყენებული გაფართოება ავტომატურად <b>არ</b> განახლდება. ახალი ვერსიისთვის ჩამოტვირთეთ და იგივე საქაღალდეზე გადააწერეთ.</span>
+        <span data-en>An extension installed this way does <b>not</b> update automatically. For a new version, download it and overwrite the same folder.</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3><span data-ka>ორგანიზაციისთვის</span><span data-en>For organisations</span></h3>
+    <p class="note">
+      <span data-ka>თუ Chrome ან Edge ცენტრალიზებულად იმართება — უნივერსიტეტში, კომპანიაში, საკლასო ოთახში — გაფართოება შეიძლება ავტომატურად დაყენდეს და განახლდეს ჯგუფური პოლიტიკით, მაღაზიის გარეშე.</span>
+      <span data-en>If Chrome or Edge is centrally managed — a university, a company, a classroom — the extension can be installed and kept up to date by policy, with no store involved.</span>
+    </p>
+    <p style="margin:0">
+      <a class="btn" href="https://github.com/GIS-GEORGIA/qgis-ge-launcher/blob/main/docs/ENTERPRISE.md">
+        <span data-ka>ინსტრუქცია ადმინისტრატორებისთვის</span><span data-en>Administrator guide</span>
+      </a>
+    </p>
+  </div>
+
+  <h2><span data-ka>როგორ გამოიყურება</span><span data-en>What it looks like</span></h2>
+  <p class="lead">
+    <span data-ka>ქვემოთ ნაჩვენები ბმულები მაგალითია — თქვენი სია სრულად თქვენ განსაზღვრავთ.</span>
+    <span data-en>The links below are an example — your own list is entirely up to you.</span>
+  </p>
+  <div class="shots">
+    <figure>
+      <img src="img/popup-light.png" alt="">
+      <figcaption>
+        <span data-ka>ბმულების ფანჯარა, რჩეულები ზემოთ</span>
+        <span data-en>The popup, pinned links on top</span>
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="img/popup-dark-search.png" alt="">
+      <figcaption>
+        <span data-ka>ძებნა და მუქი თემა</span>
+        <span data-en>Search and the dark theme</span>
+      </figcaption>
+    </figure>
+    <figure>
+      <img src="img/options.png" alt="">
+      <figcaption>
+        <span data-ka>რედაქტორი — ჯგუფები, ფერები, JSON</span>
+        <span data-en>The editor — groups, colours, JSON</span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <h2><span data-ka>პრივატულობა</span><span data-en>Privacy</span></h2>
+  <div class="card">
+    <p class="note" style="margin:0">
+      <span data-ka>გაფართოება არცერთ სერვერს არ უკავშირდება და ითხოვს ერთადერთ ნებართვას — <code>storage</code> — რომ თქვენივე ბმულების სია დაიმახსოვროს. არც ისტორიაზე, არც ჩანართების შიგთავსზე წვდომა არ აქვს; საიტების ხატულებსაც კი არ ჩამოტვირთავს.</span>
+      <span data-en>The extension contacts no server and asks for a single permission — <code>storage</code> — to remember your own list of links. It has no access to your history or the content of your tabs, and does not even download site favicons.</span>
+    </p>
+    <p style="margin:14px 0 0">
+      <a class="btn" href="https://github.com/GIS-GEORGIA/qgis-ge-launcher/blob/main/PRIVACY.md">
+        <span data-ka>სრული პოლიტიკა</span><span data-en>Full policy</span>
+      </a>
+    </p>
+  </div>
+
+  <footer>
+    <p>
+      <a href="https://github.com/GIS-GEORGIA/qgis-ge-launcher">GIS-GEORGIA/qgis-ge-launcher</a>
+      · MIT ·
+      <a href="https://qgis.ge/">qgis.ge</a>
+    </p>
+  </footer>
+
+</div>
+
+<script>
+  var root = document.documentElement;
+  var stored = null;
+  try { stored = localStorage.getItem('lang'); } catch (e) {}
+  if (stored !== 'ka' && stored !== 'en') {
+    stored = (navigator.language || '').toLowerCase().indexOf('ka') === 0 ? 'ka' : 'en';
+  }
+  setLang(stored);
+
+  document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.dataset.setLang); });
+  });
+
+  function setLang(lang) {
+    if (lang !== 'ka' && lang !== 'en') lang = 'ka';
+    root.dataset.lang = lang;
+    root.lang = lang;
+    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.setLang === lang));
+    });
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+</script>
+</body>
+</html>
