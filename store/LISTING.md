@@ -312,3 +312,47 @@ https://github.com/GIS-GEORGIA/qgis-ge-launcher (MIT licensed)
 ```
 
 Certification takes up to seven business days.
+
+---
+
+## Opera add-ons
+
+Upload at <https://addons.opera.com/developer/>. Registration is free and has no
+regional restriction. Opera is Chromium, so the same package works unchanged —
+but the review is manual and slower than Edge, commonly one to four weeks.
+
+Opera's form differs from Edge's in three ways that matter:
+
+| Field | What Opera wants | Use |
+|---|---|---|
+| Screenshots | **612×408** preferred, 800×600 maximum, white background, at least two | `store/opera/*.png` — three, at 612×408 |
+| Summary | one sentence, roughly 20 words | the short description below |
+| License | **required**, and defaults to CC BY-NC-ND 4.0 if you leave it | choose a custom licence and give the MIT text |
+
+The 1280×800 screenshots do not fit, which is why `make_screenshots.py` has a
+second preset:
+
+```bash
+python tools/make_screenshots.py --preset opera
+```
+
+At 612×408 a shrunken popup would be unreadable, so those frames show it at 1:1
+on white beside a short caption, which is also what Opera's guidance asks for.
+
+### Fields
+
+| Field | Value |
+|---|---|
+| Package | `dist/qgis-ge-launcher-<version>.zip` |
+| Name | QGIS.GE Launcher — Quick Links |
+| Category | Productivity |
+| Summary | the **Short description** at the top of this file |
+| Description | the **Detailed description** at the top of this file |
+| Icon | taken from the package (`icons/icon128.png`) |
+| Screenshots | `store/opera/popup-light.png`, `popup-dark-search.png`, `options.png` |
+| Support page | `https://github.com/GIS-GEORGIA/qgis-ge-launcher/issues` |
+| License | Custom → paste the MIT text from `LICENSE` |
+
+Leaving the licence at its default would publish an MIT-licensed, open-source
+extension under a non-commercial, no-derivatives licence — contradicting the
+repository. Set it explicitly.

@@ -36,6 +36,7 @@ Vivaldi, Arc, Yandex. · Works in every Chromium-based browser.
 |---|---|
 | [Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/mehgilbmgbbcgpmfcdgdmemnmnpkfaom) | **LIVE** — v1.0.0, 2026-09-22 |
 | Chrome Web Store | დაბლოკილია, იხ. `store/CHROME-REGION-REQUEST.md` |
+| [Opera add-ons](https://addons.opera.com/developer/) | ასატვირთია — იხ. `store/LISTING.md` |
 | [GitHub Releases](https://github.com/GIS-GEORGIA/qgis-ge-launcher/releases/latest) | ხელმისაწვდომია ახლავე |
 
 ### ხელით (დეველოპერის რეჟიმი) · Manually (developer mode)
@@ -95,7 +96,7 @@ tools/
   build.py             ვალიდაცია + ZIP
   make_icons.py        ხატულების გენერაცია (Pillow)
   make_dev_pages.py    dev/ გვერდების რეგენერაცია src/-იდან
-  make_screenshots.py  სქრინშოტები 1280×800 (headless Chrome)
+  make_screenshots.py  სქრინშოტები — 1280×800 და Opera-ს 612×408
   make_crx.py          ხელმოწერილი .crx + updates.xml (ცენტრალიზებული დაყენება)
 ```
 
