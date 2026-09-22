@@ -13,8 +13,6 @@ export const SCHEMA_VERSION = 1;
 
 export const DEFAULT_GROUPS = [
   { id: 'qgisge', ka: 'qgis.ge ვებგვერდები', en: 'qgis.ge sites' },
-  { id: 'tools',  ka: 'ხელსაწყოები',         en: 'Tools' },
-  { id: 'github', ka: 'GitHub',              en: 'GitHub' },
 ];
 
 // color: index into the tile palette (see ui.css --tile-N)
@@ -27,13 +25,8 @@ export const DEFAULT_LINKS = [
     'QGIS GEORGIA', 'QGIS GEORGIA', 1, 'qgis home'),
   L('plugins',    'qgisge', 'https://plugins.qgis.ge/',
     'პლაგინების რეპოზიტორია', 'Plugin repository', 1, 'qgis plugins repo'),
-  L('pg',         'qgisge', 'https://pg.qgis.ge/',
-    'PostGIS Manager', 'PostGIS Manager', 2, 'postgis database'),
   L('osdoc',      'qgisge', 'https://osdoc.qgis.ge/',
     'GIS დოკუმენტაცია', 'Open-source GIS docs', 6, 'docs linux gis'),
-
-  L('downloader', 'tools', 'https://gis-georgia.github.io/qgis-plugin-downloader/',
-    'QGIS Plugin Downloader', 'QGIS Plugin Downloader', 1, 'qgis download plugins'),
 ];
 
 export const DEFAULT_SETTINGS = {
