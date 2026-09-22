@@ -55,8 +55,11 @@ Details, in case they help:
 - The extension is open source, MIT licensed, Manifest V3:
   https://github.com/GIS-GEORGIA/qgis-ge-launcher
 - It requests a single permission ("storage") and makes no network requests.
-- It is already submitted to the Microsoft Edge Add-ons store, which has no
-  registration fee and no regional restriction, so the package itself is ready.
+- The same package is already published on the Microsoft Edge Add-ons store,
+  which charges no registration fee and has no regional restriction:
+  https://microsoftedge.microsoft.com/addons/detail/mehgilbmgbbcgpmfcdgdmemnmnpkfaom
+  So the extension is finished and has passed a store review — the only thing
+  standing between it and Chrome users is the payment region.
 - I am not looking to work around the restriction with an address I do not
   have — I would rather wait for Georgia to be supported properly.
 
